@@ -26,7 +26,6 @@ ZSH_THEME="robbyrussell"
 plugins=(git bundler)
 
 source $ZSH/oh-my-zsh.sh
-source ~/.git-flow-completion.zsh
 # Customize to your needs...
 export PATH=:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/usr/local/sbin:/Users/almog/proj/otp/install/R14B03/bin:/Users/almog/bin:/usr/local/share/npm/bin
 
@@ -89,8 +88,6 @@ function ydl-mp3() {
 mcd(){mkdir -p "$1" && cd "$1"} # create and change to a new directory
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
-#for kred
-export CRACKLIB_DICTPATH=/usr/local/Cellar/cracklib-words/20080507/share:/usr/local/Cellar/cracklib-words/20080507:/usr/local/Cellar/cracklib-words
 
 source '/usr/local/share/chruby/chruby.sh'
 source '/usr/local/share/chruby/auto.sh'
