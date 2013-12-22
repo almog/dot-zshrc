@@ -30,10 +30,6 @@ source $ZSH/oh-my-zsh.sh
 export PATH=:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/usr/local/sbin:/Users/almog/proj/otp/install/R14B03/bin:/Users/almog/bin:/usr/local/share/npm/bin
 
 #VIM
-##Sets the vim runtime
-#export VIM=/usr/local/Cellar/vim/7.3.672/share/vim/vim73
-##brew vim path
-#export PATH=:/usr/local/Cellar/vim/7.3.672/bin:$PATH
 alias vi=vim
 
 export GOROOT=$HOME/proj/go
