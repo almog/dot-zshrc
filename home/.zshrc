@@ -89,5 +89,6 @@ mcd(){mkdir -p "$1" && cd "$1"} # create and change to a new directory
 
 source '/usr/local/share/chruby/chruby.sh'
 source '/usr/local/share/chruby/auto.sh'
-chruby 1.9.3-p448
 
+chruby 1.9.3-p448
+export KRED_HOST="almog.hq.kred"
