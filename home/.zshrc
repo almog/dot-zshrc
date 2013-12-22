@@ -55,7 +55,9 @@ alias gff='git flow feature'
 GREP_OPTIONS=--color=auto\ --exclude=\"*.log\"
 alias git="nocorrect git"
 
+#Decode a URI (like JS decodeURIComponent)
 decode(){echo "require 'uri'; puts URI.decode('$1').gsub('+', ' ')" | ruby }
+#Encode a URI (like JS encodeURIComponent)
 encode(){echo "require 'uri'; puts URI.escape('$1').gsub('+', ' ')" | ruby }
 
 
