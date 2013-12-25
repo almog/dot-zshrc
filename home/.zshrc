@@ -50,6 +50,8 @@ bindkey "^S" history-incremental-search-forward
 export HISTFILESIZE=1000000000
 export HISTSIZE=1000000
 
+unsetopt HIST_VERIFY #Execute all expansions on ENTER
+
 alias gff='git flow feature'
 
 GREP_OPTIONS=--color=auto\ --exclude=\"*.log\"
