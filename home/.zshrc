@@ -85,7 +85,14 @@ function ydl() {
 function ydl-mp3() {
   youtube-dl -o "%(title)s.%(ext)s" --extract-audio --audio-format=mp3 $1
 }
+
 mcd(){mkdir -p "$1" && cd "$1"} # create and change to a new directory
+
+function gen_phone() {
+  curl -s 'https://www.youphone.co.il/inc/Handlers/SMSHandler.ashx?type=1' |
+  jq '.Data' |
+  sed -E 's/([0-9])/\1-/3'
+}
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
