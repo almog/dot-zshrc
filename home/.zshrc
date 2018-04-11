@@ -27,13 +27,14 @@ plugins=(git bundler)
 
 source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
-export PATH=:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/usr/local/sbin:/Users/almog/proj/otp/install/R14B03/bin:/Users/almog/bin:/usr/local/share/npm/bin
-
+export PATH=:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/usr/local/sbin
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # gnu core utils
+export PATH=$PATH:/Users/almog/proj/otp/install/R14B03/bin:/Users/almog/bin:/usr/local/share/npm/bin:/usr/local/texlive/2015/bin/x86_64-darwin/
+export PATH=$PATH:/Applications/calibre.app/Contents/console.app/Contents/MacOS
 #VIM
 alias vi=vim
+alias ltr="ls -ltr"
 
-export GOROOT=$HOME/proj/go
-export PATH=$PATH:$GOROOT/bin
 
 export PGDATA=/usr/local/var/postgres
 
@@ -49,10 +50,11 @@ bindkey "^S" history-incremental-search-forward
 #Unlimited history
 export HISTFILESIZE=1000000000
 export HISTSIZE=1000000
+export SAVEHIST=$HISTSIZE
 
 unsetopt HIST_VERIFY #Execute all expansions on ENTER
 
-alias gff='git flow feature'
+alias depry='sed -i "/binding.pry/d" ./**/*.rb'
 
 GREP_OPTIONS=--color=auto\ --exclude=\"*.log\"
 alias git="nocorrect git"
@@ -61,6 +63,8 @@ alias git="nocorrect git"
 decode(){echo "require 'uri'; puts URI.decode('$1').gsub('+', ' ')" | ruby }
 #Encode a URI (like JS encodeURIComponent)
 encode(){echo "require 'uri'; puts URI.escape('$1').gsub('+', ' ')" | ruby }
+
+alias noder="/Users/almog/.nvm/versions/node/v8.9.3/bin/node ~/nodeconf"
 
 
 DISABLE_AUTO_TITLE=true
@@ -73,9 +77,9 @@ alias zload="source ~/.zshrc"
 alias ssh-copy="pbcopy <~/.ssh/id_rsa.pub"
 
 function server() {
-local port="${1:-8000}"
-open "http://localhost:${port}/"
-python -m SimpleHTTPServer "$port"
+  local port="${1:-8000}"
+  open "http://localhost:${port}/"
+  python -m SimpleHTTPServer "$port"
 }
 
 function ydl() {
@@ -96,8 +100,28 @@ function gen_phone() {
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
+source $HOME/.klarna
+
 source '/usr/local/share/chruby/chruby.sh'
 source '/usr/local/share/chruby/auto.sh'
 
-chruby 1.9.3-p448
-export KRED_HOST="almog.hq.kred"
+chruby 2.3.3
+
+export NVM_DIR="/Users/almog/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+nvm use 8
+
+export LS_COLORS="no=00:fi=00:di=00;34:ln=00;36:pi=40;33:so=00;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=00;35:*.cmd=00;32:*.exe=00;32:*.sh=00;32:*.gz=00;31:*.bz2=00;31:*.bz=00;31:*.tz=00;31:*.rpm=00;31:*.cpio=00;31:*.t=93:*.pm=00;36:*.pod=00;96:*.conf=00;33:*.off=00;9:*.jpg=00;94:*.png=00;94:*.xcf=00;94:*.JPG=00;94:*.gif=00;94:*.pdf=00;91"
+
+# begin git brownbag helper commands
+alias find_objs='find .git/objects -type f | xargs ls -ltr'
+alias zlib_decompress="/usr/local/Cellar/openssl/1.0.2k/bin/openssl zlib -d -in"
+export poem="Writing A Curriculum Vita - Wislawa Szymborska \n\nWhat must you do?\nYou must submit an application\nand enclose a Curriculum Vitae.\n\nRegardless of how long your life is,\nthe Curriculum Vitae should be short.\n\nBe concise, select facts.\nChange landscapes into addresses\nand vague memories into fixed dates.\n\nOf all your loves, mention only the marital,\nand of the children, only those who were born.\n\nIt's more important who knows you\nthan whom you know.\nTravels - only if abroad.\nAffiliations––to what, not why.\nAwards - but not for what.\n\nWrite as if you never talked with yourself,\nas if you looked at yourself from afar.\n\nOmit dogs, cats, and birds,\nmementos, friends, dreams.\n\nState price rather than value,\ntitle rather than content.\nShoe size, not where one is going,\nthe one you are supposed to be.\n\nEnclose a photo with one ear showing.\nWhat counts is its shape, not what it hears.\n\nWhat does it hear?\nThe clatter of machinery that shreds paper.\n"
+
+# end git brownbag helper commands
+function sshfix() { eval `ssh-agent -s` && ssh-add -K ~/.ssh/id_rsa }
+function delete_merged(){ git branch --merged | egrep -v "(^\*|master|dev)"  | xargs git branch -d }
+sshfix
+
+fortune  | cowsay | lolcat
