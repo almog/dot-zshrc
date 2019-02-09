@@ -100,8 +100,6 @@ function gen_phone() {
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-source $HOME/.klarna
-
 source '/usr/local/share/chruby/chruby.sh'
 source '/usr/local/share/chruby/auto.sh'
 
