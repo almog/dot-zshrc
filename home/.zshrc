@@ -38,6 +38,11 @@ alias ltr="ls -ltr"
 
 export PGDATA=/usr/local/var/postgres
 
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
 #VI mode
 bindkey -v
 bindkey "^W" backward-kill-word
