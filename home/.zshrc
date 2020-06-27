@@ -29,8 +29,9 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/git/bin:/usr/local/sbin
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # gnu core utils
-export PATH=$PATH:/Users/almog/proj/otp/install/R14B03/bin:/Users/almog/bin:/usr/local/share/npm/bin:/usr/local/texlive/2015/bin/x86_64-darwin/
 export PATH=$PATH:/Applications/calibre.app/Contents/console.app/Contents/MacOS
+export PATH=$PATH:/Users/almogkurtser/bin
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 #VIM
 alias vi=vim
 alias ltr="ls -ltr"
@@ -126,4 +127,15 @@ export NODE_PATH="$(npm config --global get prefix)/lib/node_modules"
 source '/usr/local/share/chruby/chruby.sh'
 source '/usr/local/share/chruby/auto.sh'
 
-chruby 2.6.1
+chruby 2.7.0
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
+export PYTHONDONTWRITEBYTECODE=1 # disable bytecode (.pyc) everywhere
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+cd ~/proj
+export PATH=/Users/almogkurtser/proj/SingleFile/cli:$PATH
