@@ -50,9 +50,11 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' # https://www.re
 bindkey -v
 bindkey "^W" backward-kill-word
 bindkey "^H" backward-delete-char 
+
+# Regular expression reverse search (for regular search use history-incremental-search-backward)
+bindkey '^R' history-incremental-pattern-search-backward
 bindkey '^N' history-beginning-search-backward
 #bindkey -M viins '^U' kill-line
-bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 
 #Unlimited history
