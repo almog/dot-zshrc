@@ -91,36 +91,23 @@ function server() {
 }
 
 function ydl() {
-  youtube-dl -o "%(stitle)s.mp4" $1
+  youtube-dl -o "%(stitle)s.mp4" $@
 }
 
 function ydl-mp3() {
   youtube-dl -o "%(title)s.%(ext)s" --extract-audio --audio-format=mp3 $1
 }
 
-mcd(){mkdir -p "$1" && cd "$1"} # create and change to a new directory
-
-function gen_phone() {
-  curl -s 'https://www.youphone.co.il/inc/Handlers/SMSHandler.ashx?type=1' |
-  jq '.Data' |
-  sed -E 's/([0-9])/\1-/3'
+function power_outage_check() {
+   curl 'https://www.iec.co.il/pages/IecServicesHandler.ashx?a=CheckInterruptByAddress&cityID=25&streetID=13781&homeNum=45&Districtid=802&FullAddres=%D7%94%D7%A2%D7%A6%D7%9E%D7%90%D7%95%D7%AA+45%2C+%D7%90%D7%91%D7%9F+%D7%99%D7%94%D7%95%D7%93%D7%94&guid=1652787602833' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 11.0; rv:99.0) Gecko/20100101 Firefox/100.0' -H 'Accept: application/json, text/javascript, */*; q=0.01' -H 'Accept-Language: en-US,en;q=0.5' -H 'Accept-Encoding: gzip, deflate, br' -H 'X-Requested-With: XMLHttpRequest' -H 'Connection: keep-alive' -H 'Referer: https://www.iec.co.il/pages/electricityfaults.aspx' -H 'Sec-Fetch-Dest: empty' -H 'Sec-Fetch-Mode: cors' -H 'Sec-Fetch-Site: same-origin' -H 'DNT: 1' -H 'Sec-GPC: 1' -H 'TE: trailers' | jq '.IncidentStatusName'
 }
+
+mcd(){mkdir -p "$1" && cd "$1"} # create and change to a new directory
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 export LS_COLORS="no=00:fi=00:di=00;34:ln=00;36:pi=40;33:so=00;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=00;35:*.cmd=00;32:*.exe=00;32:*.sh=00;32:*.gz=00;31:*.bz2=00;31:*.bz=00;31:*.tz=00;31:*.rpm=00;31:*.cpio=00;31:*.t=93:*.pm=00;36:*.pod=00;96:*.conf=00;33:*.off=00;9:*.jpg=00;94:*.png=00;94:*.xcf=00;94:*.JPG=00;94:*.gif=00;94:*.pdf=00;91"
 
-# begin git brownbag helper commands
-alias find_objs='find .git/objects -type f | xargs ls -ltr'
-alias zlib_decompress="/usr/local/Cellar/openssl/1.0.2k/bin/openssl zlib -d -in"
-export poem="Writing A Curriculum Vita - Wislawa Szymborska \n\nWhat must you do?\nYou must submit an application\nand enclose a Curriculum Vitae.\n\nRegardless of how long your life is,\nthe Curriculum Vitae should be short.\n\nBe concise, select facts.\nChange landscapes into addresses\nand vague memories into fixed dates.\n\nOf all your loves, mention only the marital,\nand of the children, only those who were born.\n\nIt's more important who knows you\nthan whom you know.\nTravels - only if abroad.\nAffiliations––to what, not why.\nAwards - but not for what.\n\nWrite as if you never talked with yourself,\nas if you looked at yourself from afar.\n\nOmit dogs, cats, and birds,\nmementos, friends, dreams.\n\nState price rather than value,\ntitle rather than content.\nShoe size, not where one is going,\nthe one you are supposed to be.\n\nEnclose a photo with one ear showing.\nWhat counts is its shape, not what it hears.\n\nWhat does it hear?\nThe clatter of machinery that shreds paper.\n"
-
-# end git brownbag helper commands
-function sshfix() { eval `ssh-agent -s` && ssh-add -K ~/.ssh/id_rsa }
-function delete_merged(){ git branch --merged | egrep -v "(^\*|master|dev)"  | xargs git branch -d }
-sshfix
-
-fortune  | cowsay | lolcat
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
