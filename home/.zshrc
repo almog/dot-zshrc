@@ -31,7 +31,7 @@ export PATH=:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/loca
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # gnu core utils
 export PATH=$PATH:/Applications/calibre.app/Contents/console.app/Contents/MacOS
 export PATH=$PATH:/Users/almogkurtser/bin
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
 #VIM
 alias vi=vim
 alias ltr="ls -ltr"
@@ -127,15 +127,26 @@ export NODE_PATH="$(npm config --global get prefix)/lib/node_modules"
 source '/usr/local/share/chruby/chruby.sh'
 source '/usr/local/share/chruby/auto.sh'
 
-chruby 2.7.0
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
 export PYTHONDONTWRITEBYTECODE=1 # disable bytecode (.pyc) everywhere
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+export PYTHONSTARTUP=~/.pythonrc 
 
 cd ~/proj
 export PATH=/Users/almogkurtser/proj/SingleFile/cli:$PATH
+
+. /usr/local/opt/asdf/asdf.sh
+
+# Created by `pipx` on 2021-05-15 14:13:56
+export PATH="$PATH:/Users/almogkurtser/.local/bin"
+
+# Install a package without updating everything
+export HOMEBREW_NO_AUTO_UPDAT=1
+
+PYENV_ROOT=$(pyenv root)
+export PATH="$HOME/.pyenv/bin:$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
+
+eval "$(pyenv init -)"
+
+#export ANDROID_SDK_ROOT="$HOME/bin/android_sdk"
+#export PATH="$PATH:$ANDROID_SDK_ROOT/tools/bin:$ANDROID_SDK_ROOT/tools/lib:$ANDROID_SDK_ROOT/platform-tools"
