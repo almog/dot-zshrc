@@ -43,6 +43,8 @@ export PGDATA=/usr/local/var/postgres
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
+#zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}' # https://stackoverflow.com/a/14350512/103088
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' # https://www.reddit.com/r/zsh/comments/4aq8ja/is_it_possible_to_enable_smartcase_tab_completion/
 
 #VI mode
 bindkey -v
