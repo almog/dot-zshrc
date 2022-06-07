@@ -91,11 +91,11 @@ function server() {
 }
 
 function ydl() {
-  youtube-dl -o "%(stitle)s.mp4" $@
+  yt-dlp -o "%(stitle)s.mp4" $@
 }
 
 function ydl-mp3() {
-  youtube-dl -o "%(title)s.%(ext)s" --extract-audio --audio-format=mp3 $1
+  yt-dlp -o "%(title)s.%(ext)s" --extract-audio --audio-format=mp3 $1
 }
 
 function power_outage_check() {
